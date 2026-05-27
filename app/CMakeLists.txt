@@ -3,6 +3,15 @@ project("mygame")
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_library(main SHARED app/src/main/cpp/native-lib.cpp)
+# Esta es la ruta CORRECTA a tu juego
+add_library(main SHARED 
+    src/main/cpp/native-lib.cpp
+)
 
-target_link_libraries(main android log EGL GLESv2 OpenSLES)
+target_link_libraries(main 
+    android 
+    log 
+    EGL 
+    GLESv2 
+    OpenSLES
+)
