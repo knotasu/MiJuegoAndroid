@@ -1,17 +1,8 @@
 cmake_minimum_required(VERSION 3.22)
 project("mygame")
-
 set(CMAKE_CXX_STANDARD 11)
-
-# Esta es la ruta CORRECTA a tu juego
-add_library(main SHARED 
-    src/main/cpp/native-lib.cpp
-)
-
-target_link_libraries(main 
-    android 
-    log 
-    EGL 
-    GLESv2 
-    OpenSLES
-)
+add_library(raylib STATIC IMPORTED)
+set_target_properties(raylib PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/libs/${ANDROID_ABI}/libraylib.a)
+add_library(main SHARED src/main/cpp/native-lib.cpp)
+target_link_libraries(main raylib android log EGL GLESv2 OpenSLES c m)
+target_include_directories(main PRIVATE ${CMAKE_SOURCE_DIR}/src/main/cpp/include)
